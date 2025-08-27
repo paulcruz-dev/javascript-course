@@ -90,91 +90,91 @@
 // // scoreKoalas = calcAverage(23, 34, 27);
 // // console.log(checkWinner(scoreDolphins, scoreKoalas));
 
-// const grades = [85, 92, 78, 96, 88];
-// console.log(grades);
+const grades = [85, 92, 78, 96, 88];
+console.log(grades);
  
-// const friends = ["John", "Paul", "Mark"];
-// console.log(friends);
+const friends = ["John", "Paul", "Mark"];
+console.log(friends);
  
-// const mixed = ["Jeyp", 24, false, friends];
-// console.log(mixed);
+const mixed = ["Jeyp", 24, false, friends];
+console.log(mixed);
  
-// const years = new Array(1991, 1984, 2008, 2020);
-// console.log(years);
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years);
  
-// console.log(friends[0]);
-// console.log(friends[1]);
-// console.log(friends[2]);
-// console.log(friends[3]);
+console.log(friends[0]);
+console.log(friends[1]);
+console.log(friends[2]);
+console.log(friends[3]);
  
-// console.log(friends.length);
-// console.log(friends[friends.length - 1]);
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
  
-// friends[0] = "Jay";
-// console.log(friends);
+friends[0] = "Jay";
+console.log(friends);
  
-// const calcAge = function(birthYear) {
-//     return 2037 - birthYear;
-// };
+const calcAge = function(birthYear) {
+    return 2037 - birthYear;
+};
  
-// const ages = [calcAge(1991), calcAge(1967), calcAge(2002)];
-// console.log(ages);
+const ages = [calcAge(1991), calcAge(1967), calcAge(2002)];
+console.log(ages);
  
-// const newLength = friends.push("Tom");
-// console.log(friends);
-// console.log(newLength);
+const newLength = friends.push("Tom");
+console.log(friends);
+console.log(newLength);
  
-// friends.unshift("John");
-// console.log(friends);
+friends.unshift("John");
+console.log(friends);
  
-// // Removing Element
-// // Last Item
-// const popped = friends.pop();
-// console.log(popped);
-// console.log(friends);
-// // First Item
-// const shifted = friends.shift();
-// console.log(shifted);
-// console.log(friends);
+// Removing Element
+// Last Item
+const popped = friends.pop();
+console.log(popped);
+console.log(friends);
+// First Item
+const shifted = friends.shift();
+console.log(shifted);
+console.log(friends);
  
-// console.log(friends.indexOf("Paul"));
-// console.log(friends.indexOf("Mark"));
+console.log(friends.indexOf("Paul"));
+console.log(friends.indexOf("Mark"));
  
-// console.log(friends.includes("Paul"));
-// console.log(friends.includes("John"));
+console.log(friends.includes("Paul"));
+console.log(friends.includes("John"));
  
-// // Array Iteration
-// for (let i = 0; i < friends.length; i++) {
-//     console.log(friends[i]);
-// }
+// Array Iteration
+for (let i = 0; i < friends.length; i++) {
+    console.log(friends[i]);
+}
  
-// friends.forEach(
-//     function(friends, index) {
-//         console.log(`${index + 1}: ${friends}`);
-//     }
-// );
+friends.forEach(
+    function(friends, index) {
+        console.log(`${index + 1}: ${friends}`);
+    }
+);
  
-// friends.forEach(
-//     (friend, index) => {
-//         console.log(`Friend ${index + 1}: ${friend}`);
-//     }
-// )
+friends.forEach(
+    (friend, index) => {
+        console.log(`Friend ${index + 1}: ${friend}`);
+    }
+)
  
-// const grades2 = [85, 92, 78, 96, 88, 74];
-// let total = 0;
+const grades2 = [85, 92, 78, 96, 88, 74];
+let total = 0;
  
-// for (let i = 0; i < grades2.length; i++) {
-//   total += grades2[i];
-// }
+for (let i = 0; i < grades2.length; i++) {
+  total += grades2[i];
+}
  
-// const average1 = total / grades2.length;
-// console.log(`Average grade: ${average.toFixed(2)}`);
+const average1 = total / grades2.length;
+console.log(`Average grade: ${average1.toFixed(2)}`);
  
-// let passedCount = 0;
-// grades2.forEach((grade) => {
-//   if (grade >= 70) passedCount++;
-// });
-// console.log(`${passedCount} out of ${grades2.length} students passed`);
+let passedCount = 0;
+grades2.forEach((grade) => {
+  if (grade >= 70) passedCount++;
+});
+console.log(`${passedCount} out of ${grades2.length} students passed`);
  
 // Coding Challenge #2 - Student Grade Manager
  
