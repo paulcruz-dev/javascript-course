@@ -37,13 +37,51 @@ document.querySelector('.check').addEventListener('click', function () {
  
   if (guess === secretNumber) {
     console.log('Lowpet mo naman yah');
-    document.querySelector('.message').textContent = 'TALAGANG SOBRANG BANGIS';
     document.querySelector('.number').textContent = secretNumber;
+    if (score > highscore) {
+        highscore = score;
+        document.querySelector('.highscore').textContent = highscore;
+    }
+    document.querySelector('.guess').disabled = true;
+    document.querySelector('.check').disabled = true;
+    document.querySelector('.message').textContent = 'TALAGANG SOBRANG BANGIS';
+ 
   }  else if (guess > secretNumber) {
     console.log('Too high!');
     document.querySelector('.message').textContent = 'TAAS NAMAN YAH, ULIT';
+    score--;
+    document.querySelector('.score').textContent = score;
+    if (score < 1) {
+        document.querySelector('.message').textContent = 'OLATS YAH';
+        document.querySelector('.number').textContent = secretNumber;
+        document.querySelector('.guess').disabled = true;
+        document.querySelector('.check').disabled = true;
+    }
   } else if (guess < secretNumber) {
     console.log('Too low!');
     document.querySelector('.message').textContent = 'BABA NAMAN YAH, ULIT';
+    score--;
+    document.querySelector('.score').textContent = score;
+    if (score < 1) {
+        document.querySelector('.message').textContent = 'OLATS YAH, UWI KANA NGA';
+        document.querySelector('.number').textContent = secretNumber;
+        document.querySelector('.guess').disabled = true;
+        document.querySelector('.check').disabled = true;
+    }
   }
+});
+ 
+document.querySelector('.again').addEventListener('click', function () {
+  // block
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.message').textContent = 'Start guessing...';
+  // restart secret number display
+  document.querySelector('.number').textContent = '?';
+  // restart the score
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.guess').value = '';
+  // enable guess and check
+  document.querySelector('.guess').disabled + true;
+  document.querySelector('.check').disabled + true;
 });
