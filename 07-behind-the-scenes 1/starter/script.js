@@ -76,23 +76,77 @@
 // timer.start();
 // timer.startModern();
  
-const functionTypes = {
-    regularFunction: function () {
-        console.log('Arguments length:', arguments.length);
-        console.log('First argument:', arguments[0]);
-    },
+// const functionTypes = {
+//     regularFunction: function () {
+//         console.log('Arguments length:', arguments.length);
+//         console.log('First argument:', arguments[0]);
+//     },
  
-    arrowFunction: () => {
-        console.log(arguments);
-        console.log('Arrow function called');
-    },
+//     arrowFunction: () => {
+//         console.log(arguments);
+//         console.log('Arrow function called');
+//     },
  
-    modernFunction: (...args) => {
-        console.log('Args length', args.length);
-        console.log('First arg:', args[0]);
-    },
-}
+//     modernFunction: (...args) => {
+//         console.log('Args length', args.length);
+//         console.log('First arg:', args[0]);
+//     },
+// }
  
-functionTypes.regularFunction('hello', 'world');
-// functionTypes.arrowFunction('test');
-functionTypes.modernFunction('modern', 'approach');
+// functionTypes.regularFunction('hello', 'world');
+// // functionTypes.arrowFunction('test');
+// functionTypes.modernFunction('modern', 'approach');
+ 
+// let age = 30;
+ 
+// let oldage = age;
+ 
+// age = 31;
+// console.log('age', age);
+// console.log('oldAge', oldage);
+ 
+// const me = {name: 'Paul', age: 22};
+ 
+// const friend = me;
+ 
+// friend.name = 'John';
+// friend.age = 23;
+ 
+// console.log('me:', me);
+// console.log('friend:', friend);
+ 
+// const original = {
+//     name: 'Paul',
+//     age: 22,
+//     hobbies: ['reading', 'sleeping'],
+// };
+ 
+// const shallowCopy = { ...original };
+ 
+// shallowCopy.name = 'John';
+ 
+// console.log('original name:', original.name);
+// console.log('Copy name:', shallowCopy.name);
+ 
+// shallowCopy.hobbies.push('gaming');
+ 
+// console.log(original.hobbies);
+// console.log(shallowCopy.hobbies);
+ 
+const deepOriginal = {
+    name: 'Berting',
+    age: 21,
+    // nested object
+    address: {city: 'Manila', country: 'Philippines'},
+    // nested array
+    hobbies: ['sleeping', 'reading'],
+};
+ 
+const deepCopy = structuredClone(deepOriginal);
+ 
+deepCopy.address.city = 'Quezon';
+deepCopy.hobbies.push('eating');
+deepCopy.name = 'Cardo';
+ 
+console.log(deepOriginal);
+console.log(deepCopy);
