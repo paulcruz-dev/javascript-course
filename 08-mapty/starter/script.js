@@ -1,4 +1,5 @@
 'use strict';
+
 console.log('Mapty OOP Foundation');
 
 class Workout {
@@ -7,10 +8,14 @@ class Workout {
   clicks = 0;
 
   constructor(coords, distance, duration) {
+    // store the coords as an array of latitude and longitude
     this.coords = coords;
+    // store distance in km
     this.distance = distance;
+    // store duration in minutes
     this.duration = duration;
   }
+
   _setDescription() {
     const months = [
       'January',
@@ -26,25 +31,32 @@ class Workout {
       'November',
       'December',
     ];
-    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}`;
+
+    // generate description using workout type and current date
+    this.description = `${this.type[0].toUpperCase()} ${this.type.slice(1)} on
+           ${months[this.date.getMonth()]}
+           ${this.date.getDate()}`;
   }
 
   click() {
     this.clicks++;
   }
 }
+// Test the Workout class
+const testWorkout = new Workout([40.7128, -74.006], 5.2, 24);
+console.log('Test workout:', testWorkout);
 
 class Running extends Workout {
   type = 'running';
 
   constructor(coords, distance, duration, cadence) {
     super(coords, distance, duration);
+    //store the cadence (steps per minute)
     this.cadence = cadence;
     this.calcPace();
     this._setDescription();
   }
+
   calcPace() {
     this.pace = this.duration / this.distance;
     return this.pace;
@@ -60,6 +72,7 @@ class Cycling extends Workout {
     this.calcSpeed();
     this._setDescription();
   }
+
   calcSpeed() {
     this.speed = this.distance / (this.duration / 60);
     return this.speed;
@@ -67,21 +80,29 @@ class Cycling extends Workout {
 }
 
 const run1 = new Running([39.7392, -104.9903], 5.2, 24, 178);
-console.log('Running workout:', run1);
-console.log('Running pace:', run1.pace.toFixed(1), 'min/km');
-console.log('Running description:', run1.description);
+console.log('=== RUNNING WORKOUT ===');
+console.log('Distance:', run1.distance, 'km');
+console.log('Duration:', run1.duration, 'min');
+console.log('Cadence:', run1.cadence, 'spm');
+console.log('Pace:', run1.pace.toFixed(1), 'min/km');
+console.log('Description:', run1.description);
+console.log('ID:', run1.id);
 
 const cycling1 = new Cycling([39.7392, -104.9903], 27, 95, 523);
-console.log('Cycling workout:', cycling1);
-console.log('Cycling speed:', cycling1.speed.toFixed(1), 'km/h');
-console.log('Cycling description:', cycling1.description);
+console.log('=== CYCLING WORKOUT ===');
+console.log('Distance:', cycling1.distance, 'km');
+console.log('Duration:', cycling1.duration, 'min');
+console.log('Elevation Gain:', cycling1.elevationGain, 'm');
+console.log('Speed:', cycling1.speed.toFixed(1), 'km/h');
+console.log('Description:', cycling1.description);
+console.log('ID:', cycling1.id);
 
-run1.click();
-cycling1.click();
-console.log('Run clicks:', run1.clicks);
-console.log('Cycling clicks:', cycling1.clicks);
-
-console.log('=== TESTING GEOLOCATION API ===');
+console.log('=== INHERITANCE TESTING ===');
+console.log(
+  'Both inherit from Workout:',
+  run1 instanceof Workout,
+  cycling1 instanceof Workout
+);
 
 class App {
   #map;
@@ -108,13 +129,15 @@ class App {
       );
     } else {
       alert('❌ Geolocation is not supported by this browser');
-      this._loadDefaultMap();
+      this.loadDefaultMap();
     }
   }
 
   _handleLocationError(error) {
     console.error('Geolocation error:', error);
+
     let message = 'Could not get your position. ';
+
     switch (error.code) {
       case error.PERMISSION_DENIED:
         message +=
@@ -136,54 +159,71 @@ class App {
   }
 
   _loadDefaultMap() {
-    console.log('Loading default map location: (Manila)');
-    const defaultCoords = [14.504, 120.994];
+    console.log('Loading default map location (Manila)');
 
+    //put the actual coordinates
+    const defaultCoords = [14.604, 120.994];
+
+    //from 13 to this.#mapzoomlevel
     this.#map = L.map('map').setView(defaultCoords, this.#mapZoomLevel);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
-        '&copy; <a href ="https://{s}.tile.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        '&copy; <a href = "https://{s}.tileopenstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
+    //new map event listener
     this.#map.on('click', this._showForm.bind(this));
 
     console.log('Default map loaded successfully');
   }
 
   _loadMap(position) {
+    //extract coordinates from the geolocation position
     const { latitude, longitude } = position.coords;
+    // test loading map
     console.log(`Loading map at coordinates: ${latitude}, ${longitude}`);
 
+    // IMPORTANT PART!!!!!!!!
+    //creating coordinate array for leaflet to understand
     const coords = [latitude, longitude];
 
+    // it initializes the map centered at user's location with a zoom level of 13
     this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
+    //add openstreetmap
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
-        '&copy; <a href ="https://{s}.tile.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        '&copy; <a href = "https://{s}.tileopenstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
+    console.log('');
+
+    //add a marker blue
     L.marker(coords).addTo(this.#map).bindPopup('You are here!').openPopup;
 
+    //new map event listener
     this.#map.on('click', this._showForm.bind(this));
 
-    console.log('Map loaded successfully at user location');
+    console.log('Map loaded succesfully at user location');
   }
 
   _showForm(mapE) {
     this.#mapEvent = mapE;
     const { lat, lng } = mapE.latlng;
-    console.log(`Map clicked at: ${lat.toFixed(4)}, ${lng.toFixed(4)} `);
+    console.log(`Map clicked at: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
 
+    // Create a marker
     L.marker([lat, lng])
       .addTo(this.#map)
       .bindPopup(
-        `Workout location<br>Lat: ${lat.toFixed(4)}<br>Lng ${lng.toFixed(4)}`
+        `Workout location <br> Lat: ${lat.toFixed(4)} <br> Lng: ${lng.toFixed(
+          4
+        )}`
       )
       .openPopup();
   }
 }
 
 const app = new App();
-console.log('Hour 2  complete!');
+console.log('Hour 2 Complete!!!');
